@@ -18,7 +18,7 @@ while (condition) {
         }
     ]);
     todos.push(todoQuestion.firstQuestion);
-    console.log(chalk.green("Updated todos:"));
+    console.log(("Updated todos:"));
     todos.forEach(todo => console.log(chalk.cyan(todo)));
     condition = todoQuestion.secondQuestion;
 }

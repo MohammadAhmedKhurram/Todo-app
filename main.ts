@@ -1,28 +1,33 @@
+#! /usr/bin/env node
+
 import inquirer from "inquirer";
-import chalk from "chalk";
+import chalk from 'chalk';
 
 let todos: string[] = [];
 
-console.log(chalk.bold.red.bgYellow('Welcome To The Only Choice Todo App'));
+console.log(chalk.redBright.bgYellow("Hello! Let's get organized with your tasks."));
 
-let condition = true;
+let condition: boolean = true
+
 while (condition) {
-    let todoQuestion = await inquirer.prompt([
+    let todosQuestions = await inquirer.prompt([
         {
-            name: "firstQuestion",
             type: "input",
-            message: chalk.yellow("What would you like to add in your todos?")
+            name: "question1",
+            message: chalk.yellow("Add a task to your list. (You can continue adding more tasks individually.)")
         },
         {
-            name: "secondQuestion",
             type: "confirm",
-            message: chalk.blue("Would you like to add more in your todos?"),
-            default: true
+            name: "question2",
+            message: chalk.blue("Do you have more tasks to add?"),
+            default: "true"
         }
-    ]);
-
-    todos.push(todoQuestion.firstQuestion);
-    console.log(chalk.green("Updated todos:"));
-    todos.forEach(todo => console.log(chalk.cyan(todo))); // Print each todo item in cyan color
-    condition = todoQuestion.secondQuestion;
+    ])
+    todos.push(todosQuestions.question1)
+    condition = todosQuestions.question2
 }
+
+console.log(chalk.green("Your tasks list:"));
+todos.forEach(element => {
+    console.log(chalk.cyan(element));
+});
